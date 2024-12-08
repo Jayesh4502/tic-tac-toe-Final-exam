@@ -14,6 +14,23 @@ import time
 from player import HumanPlayer, RandomComputerPlayer, SmartComputerPlayer
 
 
+score = {"wins": 0, "losses": 0, "ties": 0}
+
+
+def update_score(result):
+    if result == 'win':
+        score["wins"] += 1
+    elif result == 'loss':
+        score["losses"] += 1
+    elif result == 'tie':
+        score["ties"] += 1
+
+
+result = check_game_result()  
+update_score(result)
+
+
+return render_template("index.html", score=score)
 class TicTacToe():
     def __init__(self):
         self.board = self.make_board()
@@ -111,3 +128,5 @@ if __name__ == '__main__':
     o_player = HumanPlayer('O')
     t = TicTacToe()
     play(t, x_player, o_player, print_game=True)
+    
+
